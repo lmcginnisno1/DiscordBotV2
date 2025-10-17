@@ -23,6 +23,7 @@ With this in mind, here is the setup instructions using an Oracle Cloud VM
 
 ![PuTTyIp](/screenshots/PuTTyIp.png)
 ![PuTTyAuth](/screenshots/PuTTyAuth.png)
+
 10. login as opc and install Python by running: ```sudo apt install python3 python3-pip```
 11. verify the installation by running: ```python3 --version pip3 --version```
 12. install the required dependencies by running: ```pip install statbotics python-dotenv gspread discord-py audioop-lts```
@@ -30,6 +31,7 @@ With this in mind, here is the setup instructions using an Oracle Cloud VM
 
 ![WinSCPIp](/screenshots/WinSCPIp.png)
 ![WinSCPAuth](/screenshots/WinSCPAuth.png)
+
 14. open the Python-3.x.x folder and create a new folder, rename it discordbot, and transfer the project files into it
 15. Back on PuTTy, run: ```sudo nano /etc/systemd/system/discord-bot.service```
 16. copy and paste this into nano:
