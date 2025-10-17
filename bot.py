@@ -1,10 +1,9 @@
 import os
 import discord
-
 import main
-from discord import Option
-
 import utils
+
+from discord import Option
 
 bot = discord.Bot()
 
