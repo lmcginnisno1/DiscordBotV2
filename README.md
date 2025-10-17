@@ -13,7 +13,7 @@ With this in mind, here is the setup instructions using an Oracle Cloud VM
 2. Create a Google service account: https://cloud.google.com/iam/docs/service-accounts-create
 3. Download the service account key and save it to the project folder as credentials.json
 4. Create a discord application: https://discordpy.readthedocs.io/en/stable/discord.html
-5. Create and Oracle Cloud account
+5. Create an Oracle Cloud account
 6. Once you have your Oracle Cloud account, you will need to create a new instance by following these instructions: https://docs.oracle.com/en/learn/first-oci-linux-instance/index.html
 7. Install PuTTy and WinSCP
    * https://winscp.net/eng/index.php
