@@ -31,7 +31,7 @@ def call_statbotics_api(team, filename):
 
 def get_name(team):
     try:
-        name = call_tba_api(f"team/frc{team}", team).get("nickname")
+        name = call_tba_api(f"team/frc{team}" ,team).get("nickname")
     except Exception:
         return "N/A"
     return name
@@ -93,7 +93,7 @@ def get_winrate(team):
 
 def get_epa(team, epa_type):
     try:
-        epa = call_statbotics_api(team, team).get("epa").get("breakdown").get(epa_type)
+        epa = call_statbotics_api(team, team).get("epa").get("breakdown").get(epa_type + "_points")
     except Exception:
         return "N/A"
     return epa

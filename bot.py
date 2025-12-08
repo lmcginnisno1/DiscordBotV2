@@ -53,7 +53,7 @@ async def get_winrate(ctx, team):
     await ctx.respond(f"team {team}'s winrate is {utils.get_winrate(int(team))}%")
 
 @bot.command(name="get_epa", description="returns the epa of the specified type for the specified team")
-async def get_epa(ctx, team, epa_type: Option(str, "epa type", choices=["total", "auto", "teleop", "endgame"])):
+async def get_epa(ctx, team, epa_type:  str = Option(str, "epa type", choices=["total", "auto", "teleop", "endgame"])):
     await ctx.defer()
     await ctx.respond(f"team {team}'s {epa_type} epa is {utils.get_epa(int(team), epa_type)}")
 
@@ -61,6 +61,48 @@ async def get_epa(ctx, team, epa_type: Option(str, "epa type", choices=["total",
 async def get_auto_moverate(ctx, team):
     await ctx.defer()
     await ctx.respond(f"team {team} moves in auto {utils.auto_move_percentage(int(team))}% of the time")
+
+@bot.command(name="summary", description="provides all stats on the specified team")
+async def summary(ctx, team: int):
+    await ctx.defer()
+
+    name = utils.get_name(team)
+    state = utils.get_state_province(team)
+    rookie_year = utils.get_rookie_year(team)
+    district_points = utils.get_district_points(team)
+    events_played = utils.events_played(team)
+    wtl = utils.get_wtl(team)
+    winrate = utils.get_winrate(team)
+    epa_total = utils.get_epa(team, "total")
+    epa_auto = utils.get_epa(team, "auto")
+    epa_teleop = utils.get_epa(team, "teleop")
+    epa_endgame = utils.get_epa(team, "endgame")
+    auto_move = utils.auto_move_percentage(team)
+
+    # Handle district points gracefully
+    district_info = (
+        f"{district_points} district points"
+        if district_points != "N/A"
+        else "not part of any district"
+    )
+
+    summary_text = (
+        f"**Team {team} Summary**\n"
+        f"- Name: {name}\n"
+        f"- State/Province: {state}\n"
+        f"- Rookie Year: {rookie_year}\n"
+        f"- District: {district_info}\n"
+        f"- Events Played: {events_played}\n"
+        f"- WTL: {wtl}\n"
+        f"- Winrate: {winrate}%\n"
+        f"- EPA (Total): {epa_total}\n"
+        f"- EPA (Auto): {epa_auto}\n"
+        f"- EPA (Teleop): {epa_teleop}\n"
+        f"- EPA (Endgame): {epa_endgame}\n"
+        f"- Auto Move Rate: {auto_move}%"
+    )
+
+    await ctx.respond(summary_text)
 
 @bot.command(name="clear_cache", description="deletes all stored event data to refresh team stats with the latest season info")
 async def clear_cache(ctx):
