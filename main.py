@@ -25,18 +25,6 @@ async def update_sheet(event_key):
     tele_epa = []
     endgame_epa = []
     auto_moverate = []
-    avg_auto_l4 = []
-    avg_auto_l3 = []
-    avg_auto_l2 = []
-    avg_auto_l1 = []
-    avg_auto_net = []
-    avg_auto_processor = []
-    avg_tele_l4 = []
-    avg_tele_l3 = []
-    avg_tele_l2 = []
-    avg_tele_l1 = []
-    avg_tele_net = []
-    avg_tele_processor = []
     matches_played = []
     climbs = []
     climb_percents = []
@@ -57,7 +45,7 @@ async def update_sheet(event_key):
         else:
             district_points.append([team_district_points])
 
-        events_played.append([utils.events_played(team["team_number"], False)])
+        events_played.append([utils.events_played(team["team_number"])])
 
         team_stats = utils.call_statbotics_api(team["team_number"], team["team_number"])
 
@@ -83,7 +71,7 @@ async def update_sheet(event_key):
 
         parks.append([utils.parks(team["team_number"])])
 
-    sheet.batch_update([
+        sheet.batch_update([
         {
             "range": f"{os.getenv("NUM")}2:{os.getenv("NUM")}{len(numbers) + 1}",
             "values": numbers
