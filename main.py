@@ -1,7 +1,7 @@
 import os
-from dotenv import load_dotenv
 import gspread
 import utils
+from dotenv import load_dotenv
 
 load_dotenv("./constants.env")
 load_dotenv("./keys.env")
@@ -9,7 +9,7 @@ load_dotenv("./keys.env")
 TBA_Auth_Key = os.getenv("TBA_AUTH_KEY")
 gc = gspread.service_account("credentials.json")
 sheet = gc.open(os.getenv("SPREADSHEET_NAME")).sheet1
-sheet.resize(76, 29)
+sheet.resize(100, 17)
 
 async def update_sheet(event_key):
     numbers = []
@@ -67,11 +67,11 @@ async def update_sheet(event_key):
 
         climbs.append([utils.climbs(team["team_number"])])
 
-        climb_percents.append([utils.climb_percentage(team["team_number"])])
+        climb_percents.append([utils.climb_percentage(team["team_number"])+"%"])
 
         parks.append([utils.parks(team["team_number"])])
 
-        sheet.batch_update([
+    sheet.batch_update([
         {
             "range": f"{os.getenv("NUM")}2:{os.getenv("NUM")}{len(numbers) + 1}",
             "values": numbers

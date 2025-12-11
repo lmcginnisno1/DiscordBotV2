@@ -81,7 +81,7 @@ async def summary(ctx, team: int):
 
     # Handle district points gracefully
     district_info = (
-        f"{district_points} district points"
+        f"{district_points}"
         if district_points != "N/A"
         else "not part of any district"
     )
@@ -91,7 +91,7 @@ async def summary(ctx, team: int):
         f"- Name: {name}\n"
         f"- State/Province: {state}\n"
         f"- Rookie Year: {rookie_year}\n"
-        f"- District: {district_info}\n"
+        f"- District Points: {district_info}\n"
         f"- Events Played: {events_played}\n"
         f"- WTL: {wtl}\n"
         f"- Winrate: {winrate}%\n"
@@ -107,6 +107,7 @@ async def summary(ctx, team: int):
 @bot.command(name="clear_cache", description="deletes all stored event data to refresh team stats with the latest season info")
 async def clear_cache(ctx):
     await ctx.defer()
-    await ctx.respond(f"cached cleared: {utils.clear_cache()}")
+    utils.clear_cache()
+    await ctx.respond(f"cached cleared")
 
 bot.run(os.getenv("BOT_KEY"))

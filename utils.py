@@ -120,6 +120,8 @@ def auto_move_percentage(team_num):
             alliances = match["alliances"]
             score_breakdown = match.get("score_breakdown", {})
 
+            if score_breakdown is None: continue
+
             for color in ["blue", "red"]:
                 if f"frc{team_num}" in alliances[color]["team_keys"]:
                     team_slot = alliances[color]["team_keys"].index(f"frc{team_num}") + 1
@@ -166,6 +168,9 @@ def climbs(team_num):
             alliances = match["alliances"]
             score_breakdown = match.get("score_breakdown", {})
 
+            if score_breakdown is None: continue
+
+
             for color in ["blue", "red"]:
                 if f"frc{team_num}" in alliances[color]["team_keys"]:
                     team_slot = alliances[color]["team_keys"].index(f"frc{team_num}") + 1
@@ -195,6 +200,8 @@ def climb_percentage(team_num):
         for match in matches:
             alliances = match["alliances"]
             score_breakdown = match.get("score_breakdown", {})
+
+            if score_breakdown is None: continue
 
             for color in ["blue", "red"]:
                 if f"frc{team_num}" in alliances[color]["team_keys"]:
@@ -233,6 +240,9 @@ def parks(team_num):
             alliances = match["alliances"]
             score_breakdown = match.get("score_breakdown", {})
 
+            if score_breakdown is None: continue
+
+
             for color in ["blue", "red"]:
                 if f"frc{team_num}" in alliances[color]["team_keys"]:
                     team_slot = alliances[color]["team_keys"].index(f"frc{team_num}") + 1
@@ -250,5 +260,3 @@ def clear_cache():
 
     if os.path.exists("./json-files/statbotics"):
         shutil.rmtree("./json-files/statbotics")
-
-    return True
